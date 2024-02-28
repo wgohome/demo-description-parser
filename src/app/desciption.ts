@@ -17,15 +17,6 @@ export class DescriptionParser {
     return [ previewHtmlString, expandedHtmlString ];
   }
 
-  // public static parsePlainText(content: string, previewCharLimit?: number): IParsedDescription {
-  //   if (content.length <= previewCharLimit) {
-  //     return { preview: content };
-  //   } else {
-  //     const preview = content.substr(0, previewCharLimit || this.DEFAULT_PREVIEW_CHAR_LIMIT);
-  //     return { preview, full: content };
-  //   }
-  // }
-
   private static buildHtmlElement(mdContent: string): HTMLElement {
     const container = document.createElement('div');
     const fullHtmlContent = DOMPurify.sanitize(marked.parse(mdContent) as string);
@@ -56,7 +47,7 @@ export class DescriptionParser {
     let truncatedHtml = "";
     let currentLength = 0;
 
-    function traverseNode(node) {
+    function traverseNode(node: any) {
       if (node.nodeType === Node.TEXT_NODE) {
         const remainingLength = maxChars - currentLength;
         const textContent = node.textContent;
