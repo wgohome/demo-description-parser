@@ -52,17 +52,16 @@ export default function Home() {
   );
 }
 
+
 function InteractiveBox() {
   const [rawContent, setRawContent] = useState("");
   const [preview, setPreview] = useState("");
   const [expanded, setExpanded] = useState("");
 
   const handleParse = () => {
-    if (typeof window !== "undefined") {
-      const [ short, long ] = DescriptionParser.parse(rawContent, 140);
-      setPreview(short);
-      setExpanded(long);
-    }
+    const [ short, long ] = DescriptionParser.parse(rawContent, 140)
+    setPreview(short);
+    setExpanded(long);
   };
 
   const handleLoadSample = () => {
@@ -116,10 +115,7 @@ function InteractiveBox() {
 
 
 function ExampleBox({ data }: { data: ExampleData }) {
-  let [preview, expanded] = ["", ""];
-  if (typeof window !== "undefined") {
-    [preview, expanded] = data.removeIlluminaLinks ? DescriptionParser.parse(data.mdContent, undefined, true) : DescriptionParser.parse(data.mdContent);
-  }
+  const [preview, expanded] = data.removeIlluminaLinks ? DescriptionParser.parse(data.mdContent, undefined, true) : DescriptionParser.parse(data.mdContent);
 
   return (
     <div>
